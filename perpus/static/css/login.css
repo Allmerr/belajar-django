@@ -1,0 +1,16 @@
+html body .base {
+    display: flex;
+    height: 85vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.container.form-login {
+    width: 500px;
+}
+
+.container.form-login.mt-5 {
+    width: 500px;
+    margin-top: 80px !important;
+}

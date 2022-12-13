@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% for message in messages %}
+                    {% if message %}
+                        <div class="alert alert-success my-3">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+                <form action="{% url 'ubah-buku' buku.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{  form.as_p }}  
+                    <button class="btn btn-secondary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/ubah_buku.js' %}"></script>
+
+{% endblock %}

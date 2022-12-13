@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Perpustakaan</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        {% if page == 'buku' %}
+          <a class="nav-link active" href="{% url 'buku' %}" aria-current="page">Buku</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'buku' %}">Buku</a>
+        {% endif %}
+
+        {% if page == 'penulis' %}
+            <a class="nav-link active" href="{% url 'penulis' %}" aria-current="page">Penulis</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'penulis' %}">Penulis</a>
+        {% endif %}
+            <a class="nav-link" href="{% url 'tambah-buku' %}">Tambah Buku</a>
+
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+          
+        </div>
+      </div>
+    </div>
+</nav>

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container my-3">
+
+   
+        <div class="alert alert-success">Welcome back {{ user }}</div>
+        
+        {% for message in messages %}
+            {% if message %}
+                <div class="alert alert-success my-3">{{ message }}</div>
+            {% endif %}
+        {% endfor  %}
+
+        <form action="" method="get" class="my-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cari Buku" aria-label="Cari Buku" aria-describedby="button-addon2" name="buku">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">cari</button>
+            </div>
+        </form>
+
+
+        <p class="my-2">Kategori : 
+            <a class="btn btn-secondary" href="?kategori=">Semua</a>
+            {% for keterangan in keterangan_keterangan %}
+            <a class="btn btn-secondary" href="?kategori={{ keterangan.id }}">{{ keterangan.nama }}</a>
+            {% endfor %}
+        </p>
+
+        
+        <table class="table table-light table-striped border">
+            <thead>
+              <tr>
+                <th scope="col">Cover</th>
+                <th scope="col">Judul</th>
+                <th scope="col">Penulis</th>
+                <th scope="col">Penerbit</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for buku in buku_buku %}
+                    <tr>
+                        {% if buku.cover %}
+                          <td>
+                            <img src="{{ buku.cover.url }}" alt="" style="width: 100px;">
+                          </td>
+                        {% endif %}
+                        <td>{{ buku.judul }}</td>
+                        <td>{{ buku.penulis }}</td>
+                        <td>{{ buku.penerbit }}</td>
+                        <td>{{ buku.jumlah }}</td>
+                        <td>{{ buku.keterangan }}</td>
+                        <td>
+                            <a href="/buku/ubah/{{ buku.id }}" class="btn btn-warning">Ubah</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-{{ buku.id }}">
+                                hapus
+                            </button>
+                        </td>
+                        <div class="modal fade" id="hapus-{{ buku.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus {{ buku.judul }}</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Yakin Menghapus buku <strong>{{ buku.judul }}</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <a href="/buku/hapus/{{ buku.id }}" class="btn btn-danger">Hapus</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}
